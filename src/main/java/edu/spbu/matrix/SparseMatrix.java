@@ -79,7 +79,26 @@ public class SparseMatrix implements Matrix
     return new SparseMatrix(result, col, row);
   }
   
-    private SparseMatrix mul(SparseMatrix s) { // умножение разряженной на разряженную
+  
+  private DenseMatrix mul(DenseMatrix d) {
+    double[][] dT = d.transpose();
+    double[][] result = new double[row][dT.length];
+    double sum = 0;
+    for (Map.Entry<Integer, HashMap<Integer, Double>> row1 : map.entrySet()){
+      for (int j = 0; j<dT.length; j++) {
+        for (HashMap.Entry<Integer, Double> elem : row1.getValue().entrySet()) {
+          if (row1.getValue().containsKey(elem.getKey())) {
+            sum += elem.getValue()*dT[j][elem.getKey()];
+          }
+        }
+        result[row1.getKey()][j] = sum;
+        sum = 0;
+      }
+    }
+    return new DenseMatrix(result);
+  }
+  
+  private SparseMatrix mul(SparseMatrix s) { // умножение разряженной на разряженную
     SparseMatrix sT = s.transpose();
     HashMap<Integer, HashMap<Integer, Double>> result = new HashMap<Integer, HashMap<Integer, Double>>();
     double sum = 0;
@@ -102,23 +121,6 @@ public class SparseMatrix implements Matrix
     return new SparseMatrix(result, row, s.col);
   }
 
-  private DenseMatrix mul(DenseMatrix d) {
-    double[][] dT = d.transpose();
-    double[][] result = new double[row][dT.length];
-    double sum = 0;
-    for (Map.Entry<Integer, HashMap<Integer, Double>> row1 : map.entrySet()){
-      for (int j = 0; j<dT.length; j++) {
-        for (HashMap.Entry<Integer, Double> elem : row1.getValue().entrySet()) {
-          if (row1.getValue().containsKey(elem.getKey())) {
-            sum += elem.getValue()*dT[j][elem.getKey()];
-          }
-        }
-        result[row1.getKey()][j] = sum;
-        sum = 0;
-      }
-    }
-    return new DenseMatrix(result);
-  }
   
   
   /**
