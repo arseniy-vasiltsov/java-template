@@ -125,7 +125,49 @@ public class DenseMatrix implements Matrix{
    * @return
    */
   @Override public boolean equals(Object o) {
-    return false;
+    boolean y = true;
+    if (o instanceof DenseMatrix) {
+      DenseMatrix tmp = (DenseMatrix)o;
+      if (data.length == tmp.data.length && data[0].length == tmp.data[0].length) {
+        for (int i = 0; i<data.length; i++) {
+          for (int j=0; j<data[0].length; j++) {
+            if (data[i][j] != tmp.data[i][j]) {
+              y = false;
+            }
+          }
+        }
+      } else {
+        y = false;
+      }
+    } else if (o instanceof SparseMatrix) {
+      SparseMatrix tmp = (SparseMatrix)o;
+      if (data.length == tmp.row && data[0].length == tmp.col) {
+        for (int i = 0; i<tmp.row; i++) {
+          if (tmp.map.containsKey(i)) {
+            for (int j = 0; j<tmp.col; j++) {
+              if (tmp.map.get(i).containsKey(j)) {
+                if (tmp.map.get(i).get(j) != data[i][j]) {
+                  y = false;
+                }
+              } else {
+                if (data[i][j] != 0) {
+                  y = false;
+                }
+              }
+            }
+          } else {
+            for (int j = 0; j < tmp.col; j++) {
+              if (data[i][j] != 0) {
+                y = false;
+              }
+            }
+          }
+        }
+      } else {
+        y = false;
+      }
+    }
+    return y;
   }
 
 }
