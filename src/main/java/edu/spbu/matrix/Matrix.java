@@ -20,4 +20,5 @@ public interface Matrix
    */
   Matrix dmul(Matrix o);
 
+  Matrix summ(Matrix o);
 }
