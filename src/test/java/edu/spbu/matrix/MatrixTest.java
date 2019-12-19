@@ -28,8 +28,8 @@ public class MatrixTest
   @Test
   public void MultyMulDD() throws IOException {
 
-    new MatrixGenerator(1,1,"Generated1.txt",500).generate();
-    new MatrixGenerator(1,1,"Generated2.txt",500).generate();
+    new MatrixGenerator(1,1,"Generated1.txt",1000).generate();
+    new MatrixGenerator(1,1,"Generated2.txt",1000).generate();
 
     Matrix m1 = new DenseMatrix("Generated1.txt");
     Matrix m2 = new DenseMatrix("Generated2.txt");
@@ -81,8 +81,8 @@ public class MatrixTest
 
   @Test
   public void MultyMulSS() throws IOException {
-    new MatrixGenerator(1,4,"SparseGenerated1.txt",2000).generate();
-    new MatrixGenerator(1,4,"SparseGenerated2.txt",2000).generate();
+    new MatrixGenerator(1,4,"SparseGenerated1.txt",1000).generate();
+    new MatrixGenerator(1,4,"SparseGenerated2.txt",1000).generate();
 
     Matrix m1 = new SparseMatrix("SparseGenerated1.txt");
     Matrix m2 = new SparseMatrix("SparseGenerated2.txt");

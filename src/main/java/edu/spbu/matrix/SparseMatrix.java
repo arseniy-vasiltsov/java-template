@@ -195,7 +195,6 @@ public class SparseMatrix implements Matrix
           int readyrow;
           readyrow=increment();
           while(readyrow<nr) {
-            // System.out.println(readyrow);
 
             if(Rows.containsKey(readyrow))
             {
@@ -203,8 +202,6 @@ public class SparseMatrix implements Matrix
               {
                 for(int i=0;i<right.nr;i++)
                 {
-                  //System.out.println(k);
-                  //if(k.y==l.y)
                   Point p1=new Point(i,k.y);
                   if(right.SMatr.containsKey(p1))
                   {
@@ -309,7 +306,6 @@ public class SparseMatrix implements Matrix
   private ConcurrentHashMap<Integer,Row> ArrayBuilder(){//Строит таблицу "номер строки"--"ключи к элементам этой строки"
     ConcurrentHashMap<Integer,Row> Array=new ConcurrentHashMap<>();
     int numofthreads = Runtime.getRuntime().availableProcessors();
-    //int numofthreads=1;
     class Scheduler {//Распределитель задач
       int readyel0;
       Builder[] Builders;

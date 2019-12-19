@@ -216,7 +216,6 @@ public class DenseMatrix implements Matrix {
             int numofthreads = Runtime.getRuntime().availableProcessors();
             if (numofthreads > nr)
                 numofthreads = nr;
-            //int step = numofthreads * (int) (Math.log1p(nr * nc) / (Math.log(2)));
             int step = 1;
             Scheduler chief = new Scheduler(tDMtx, numofthreads, step);
 
